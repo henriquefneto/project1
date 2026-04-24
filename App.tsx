@@ -1,20 +1,21 @@
-import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import Fullscreen from './screen-wrappers/Fullscreen';
+import Header from './components/Header';
+import DateForm from './components/DateForm';
+import FormInput from './components/FormInput';
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <Fullscreen>
+      <Header/>
+      <FormInput label='Name'/>
+      <FormInput label='CPF'/>
+      <FormInput label='Blood Type'/>
+      <DateForm/>
+    </Fullscreen>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+
 });
