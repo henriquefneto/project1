@@ -3,13 +3,14 @@ import { ScrollView, StyleSheet,} from "react-native";
 
 type ScrollableProps = {
     children: React.ReactNode
+    center?: boolean
     padding?: number
     gap?: number
     onRefresh?: () => void
 };
-export default function Scrollable({children, padding = 20, gap, onRefresh}: ScrollableProps) {
+export default function Scrollable({children, center, padding = 20, gap, onRefresh}: ScrollableProps) {
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView style={[styles.container, {padding, gap}, center && styles.center]}>
       {children}
     <StatusBar style="auto" />
     </ScrollView>
@@ -22,4 +23,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     marginTop: 48,
   },
+  center: {
+    justifyContent: "center",
+    alignItems: "center",
+  }
 });

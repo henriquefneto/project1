@@ -10,7 +10,7 @@ type FormInputProps = {
 export default function FormInput({ asterisk, label, error }: FormInputProps) {
   return (
     <View>
-      <Text style={styles.label}>{label}</Text>
+      <Text style={styles.label}>{label}<Text style={{ color: "red" }}>{asterisk && "*"}</Text></Text>
       <TextInput style={styles.input} />
       {error && <Text style={styles.errorText}>{error}</Text>}
     </View>
@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
   input: {
     height: 50,
     borderWidth: 1,
-    borderColor: "#a102029d",
+    borderColor: "#0000009d",
     borderRadius: 8,
     paddingHorizontal: 15,
     fontSize: 16,

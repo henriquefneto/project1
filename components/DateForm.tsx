@@ -1,8 +1,6 @@
 import {
   View,
   Text,
-  TextInput,
-  Button,
   Platform,
   StyleSheet,
   TouchableOpacity,
@@ -23,10 +21,10 @@ export default function DateForm() {
 
   return (
     <View>
+      <Text style={styles.label}>Date of Birth</Text>
       <TouchableOpacity style={styles.button} onPress={() => setShow(true)}>
-        <Text style={styles.buttonText}>Date of Birth</Text>
+        <Text style={styles.buttonText}>{date.toLocaleDateString("pt-BR")}</Text>
       </TouchableOpacity>
-      <Text>Selected Date: {date.toLocaleDateString("pt-BR")}</Text>
       {show && (
         <DateTimePicker
           value={date}
@@ -39,16 +37,25 @@ export default function DateForm() {
   );
 }
 const styles = StyleSheet.create({
+  label: {
+    fontSize: 16,
+    margin: 5,
+    fontWeight: "bold",
+    color: "#333",
+  },
   button: {
-    backgroundColor: "#007AFF",
-    borderRadius: 5,
     paddingVertical: 10,
-    paddingHorizontal: 20,
     alignItems: "center",
-    marginTop: 25,
+    height: 50,
+    borderWidth: 1,
+    borderColor: "#0000009d",
+    borderRadius: 8,
+    paddingHorizontal: 15,
+    color: "#333",
+    backgroundColor: "#f9f9f9",
   },
   buttonText: {
-    color: "#FFFFFF",
+    color: "#000000",
     fontSize: 16,
     fontWeight: "bold",
   },
