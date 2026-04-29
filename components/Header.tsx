@@ -1,26 +1,25 @@
-import { View, Text, StyleSheet } from 'react-native'
-import React from 'react'
+import { View, Text, StyleSheet, Image } from "react-native";
+import React from "react";
 
 export default function Header() {
   return (
     <View>
-      <Text style={styles.h1}>Umbrella</Text>
-      <Text style={styles.h2}>Volunteer Registration</Text>
+      <Image
+        source={require("../assets/umbrella.png")}
+        style={{ width: 370, height: 100 }}
+        resizeMode="contain"
+      />
+      <Text style={styles.h1}>Volunteer Registration</Text>
     </View>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
-    h1: {
-        fontSize: 24,
-        fontWeight: "bold",
-        textAlign: "center",
-        marginTop: 40
-    },
-    h2: {
-        fontSize: 20,
-        fontWeight: "bold",
-        textAlign: "center",
-        marginTop: 20
-    },
-})
+  h1: {
+    fontSize: 24,
+    color: "#fff",
+    fontWeight: "bold",
+    textAlign: "center",
+    margin: 20,
+  },
+});

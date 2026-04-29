@@ -1,5 +1,7 @@
+import React, { useEffect } from "react";
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import * as NavigationBar from "expo-navigation-bar";
 
 type FullscreenProps = {
     children: React.ReactNode
@@ -9,6 +11,11 @@ type FullscreenProps = {
 }
 
 export default function Fullscreen({children, center, padding = 20, gap}: FullscreenProps) {
+
+  useEffect(() => {
+    NavigationBar.setBackgroundColorAsync("#121212");
+    NavigationBar.setButtonStyleAsync("light");
+  }, []);
   return (
     <View style={[styles.container, {padding, gap}, center && styles.center]}> 
       {children}
@@ -22,7 +29,7 @@ export default function Fullscreen({children, center, padding = 20, gap}: Fullsc
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#ffffff",
+    backgroundColor: "#121212",
   },
   center: {
     justifyContent: "center",

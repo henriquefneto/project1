@@ -10,27 +10,32 @@ import DateTimePicker, {
   DateTimePickerEvent,
 } from "@react-native-community/datetimepicker";
 
-export default function DateForm() {
-  const [date, setDate] = useState(new Date());
+type DateFormProps = {
+  date: Date;
+  onChange: (date: Date) => void;
+};
+export default function DateForm({ date, onChange }: DateFormProps) {
   const [show, setShow] = useState(false);
 
-  const onChange = (event: DateTimePickerEvent, selectedDate?: Date) => {
-    setShow(Platform.OS === "ios"); // Mantém aberto no iOS, fecha no Android
-    if (selectedDate) setDate(selectedDate);
+  const handleChange = (event: DateTimePickerEvent, selectedDate?: Date) => {
+    setShow(Platform.OS === "ios");
+    if (selectedDate) onChange(selectedDate);
   };
 
   return (
     <View>
       <Text style={styles.label}>Date of Birth</Text>
       <TouchableOpacity style={styles.button} onPress={() => setShow(true)}>
-        <Text style={styles.buttonText}>{date.toLocaleDateString("pt-BR")}</Text>
+        <Text style={styles.buttonText}>
+          {date.toLocaleDateString("pt-BR")}
+        </Text>
       </TouchableOpacity>
       {show && (
         <DateTimePicker
           value={date}
           mode="date"
           display="default"
-          onChange={onChange}
+          onChange={handleChange}
         />
       )}
     </View>
@@ -41,22 +46,20 @@ const styles = StyleSheet.create({
     fontSize: 16,
     margin: 5,
     fontWeight: "bold",
-    color: "#333",
+    color: "#fff",
   },
   button: {
     paddingVertical: 10,
-    alignItems: "center",
     height: 50,
     borderWidth: 1,
-    borderColor: "#0000009d",
     borderRadius: 8,
     paddingHorizontal: 15,
-    color: "#333",
-    backgroundColor: "#f9f9f9",
+    color: "#fff",
+    backgroundColor: "#1e1e1e",
+    borderColor: "#ffffff3d",  
   },
   buttonText: {
-    color: "#000000",
+    color: "#fff",
     fontSize: 16,
-    fontWeight: "bold",
   },
 });
