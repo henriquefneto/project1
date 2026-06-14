@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { ActivityIndicator, Switch } from "react-native";
+import { ActivityIndicator } from "react-native";
 import Header from "./components/Header";
 import DateForm from "./components/DateForm";
 import FormInput from "./components/FormInput";
@@ -7,8 +7,9 @@ import FormButton from "./components/FormButton";
 import Scrollable from "./screen-wrappers/Scrollable";
 import Fullscreen from "./screen-wrappers/Fullscreen";
 import BloodTypePicker from "./components/BloodTypePicker";
-import TermsSwitch from "./components/TermsSwicth";
-import { SafeAreaView } from "react-native-safe-area-context";
+import TermsSwitch from "./components/TermsSwitch";
+import { SafeAreaProvider } from "react-native-safe-area-context";
+import ThemeContextProvider, { ThemeContext } from "./contexts/ThemeContext";
 
 export default function App() {
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -28,7 +29,7 @@ export default function App() {
 
     let error = "";
     if (text.length > 0 && text.length < min) {
-      error = `Mínimo de ${min} caracteres.`;
+      error = `Minimum of ${min} characters.`;
     }
     setErrors((prev) => ({ ...prev, [field]: error }));
   };
@@ -59,39 +60,45 @@ export default function App() {
 
   if (isLoading) {
     return (
-      <Fullscreen center>
-        <ActivityIndicator size="large" color="#0000ff" />
-      </Fullscreen>
+      <SafeAreaProvider>
+        <Fullscreen center>
+          <ActivityIndicator size="large" color="#0000ff" />
+        </Fullscreen>
+      </SafeAreaProvider>
     );
   }
 
   return (
-      <Scrollable>
-        <Header />
-        <FormInput
-          label="Name"
-          asterisk
-          value={fields.name}
-          error={errors.name}
-          onChangeText={(text) => handleChange("name", text, 3)}
-        />
-        <FormInput
-          label="CPF"
-          asterisk
-          value={fields.cpf}
-          error={errors.cpf}
-          maxLength={11}
-          numericOnly
-          onChangeText={(text) => handleChange("cpf", text, 11)}
-        />
-        <BloodTypePicker value={bloodType} onChange={setBloodType} />
-        <DateForm date={dateOfBirth} onChange={setDateOfBirth} />
-        <TermsSwitch value={termsAccepted} onChange={setTermsAccepted} />
-        <FormButton
-          label="Confirm"
-          onPress={onSubmit}
-          disabled={!isFormValid}
-        />
-      </Scrollable>
+    <SafeAreaProvider>
+      <ThemeContextProvider>
+        <Scrollable>
+          <Header />
+          <FormInput
+            label="Name"
+            asterisk
+            value={fields.name}
+            error={errors.name}
+            onChangeText={(text) => handleChange("name", text, 3)}
+          />
+          <FormInput
+            label="CPF"
+            asterisk
+            value={fields.cpf}
+            error={errors.cpf}
+            maxLength={11}
+            numericOnly
+            onChangeText={(text) => handleChange("cpf", text, 11)}
+          />
+          <BloodTypePicker value={bloodType} onChange={setBloodType} />
+          <DateForm date={dateOfBirth} onChange={setDateOfBirth} />
+          <TermsSwitch value={termsAccepted} onChange={setTermsAccepted} />
+          <FormButton
+            label="Confirm"
+            onPress={onSubmit}
+            disabled={!isFormValid}
+          />
+        </Scrollable>
+      </ThemeContextProvider>
+    </SafeAreaProvider>
   );
 }

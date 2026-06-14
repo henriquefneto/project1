@@ -1,9 +1,11 @@
 import { View, Text, StyleSheet, Image } from "react-native";
 import React from "react";
+import ThemeSwitch from "./ThemeSwitch";
 
 export default function Header() {
   return (
     <View>
+      <ThemeSwitch value={false} onChange={() => {}} />
       <Image
         source={require("../assets/umbrella.png")}
         style={{ width: 370, height: 100 }}

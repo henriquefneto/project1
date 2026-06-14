@@ -1,4 +1,4 @@
-import { View, Text, TextInput, StyleSheet } from "react-native";
+import { View, Text, TextInput, StyleSheet, TextInputProps } from "react-native";
 import React from "react";
 
 type FormInputProps = {
@@ -6,10 +6,9 @@ type FormInputProps = {
   label?: string;
   error?: string;
   value?: string;
-  maxLength?: number;
   numericOnly?: boolean;
   onChangeText?: (text: string) => void;
-};
+}& TextInputProps;
 
 export default function FormInput({
   asterisk,
@@ -17,8 +16,8 @@ export default function FormInput({
   error,
   onChangeText,
   value,
-  maxLength,
   numericOnly,
+  ...rest
 }: FormInputProps) {
   return (
     <View>
@@ -30,9 +29,9 @@ export default function FormInput({
         style={[styles.input, error ? styles.inputError : null]}
         onChangeText={onChangeText}
         value={value}
-        maxLength={maxLength}
         keyboardType={numericOnly ? "numeric" : "default"}
         inputMode={numericOnly ? "numeric" : "text"}
+        {...rest}
       />
       {error && <Text style={styles.errorText}>{error}</Text>}
     </View>
